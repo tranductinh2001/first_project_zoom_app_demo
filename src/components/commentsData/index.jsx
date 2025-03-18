@@ -84,7 +84,7 @@ export default function App() {
   const { productId } = useParams();
   // const dispatch = useDispatch();
   // const { reviewList, loading, error } = useSelector((state) => state?.review);
-  const { reviewList, loading, error } = null;
+  const { reviewList, loading, error } = [];
   useEffect(() => {
     // dispatch(clearReviewList());
     // dispatch(fetchReviewListByProductId(productId));

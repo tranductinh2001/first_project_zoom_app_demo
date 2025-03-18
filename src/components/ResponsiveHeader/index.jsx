@@ -4,7 +4,7 @@ import { CiLogout, CiUser } from "react-icons/ci";
 import { RiArrowDownWideFill } from "react-icons/ri";
 // import { useDispatch, useSelector } from "react-redux";
 import { Link, useLocation } from "react-router-dom";
-import logo from "../../assets/logo.jpg";
+import logo from "../../assets/logo1.svg";
 // import { logout } from "../../redux/slices/authSlice";
 const { Search } = Input;
 

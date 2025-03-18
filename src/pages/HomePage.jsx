@@ -263,7 +263,7 @@ export default function HomePage() {
         <div className="flex-1 border-t border-gray-300"></div>
       </div>
 
-      <div className="flex flex-col items-start justify-start w-full gap-4 my-10">
+      <div className="flex flex-col items-start justify-center w-full gap-4 my-10">
         <div className="flex flex-col items-center justify-between w-full gap-3 sm:flex-row sm:items-stretch">
           {/* {zoomServices?.map((item, index) => (
             <AdsCard
@@ -274,10 +274,10 @@ export default function HomePage() {
             />
           ))} */}
           <Table
+            className="w-full"
             columns={columns}
             dataSource={data}
             // pagination={false}
-            rowClassName="text-left"
             pagination={false}
           />
         </div>

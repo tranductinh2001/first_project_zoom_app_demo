@@ -7,6 +7,7 @@ import {
   message,
   Table,
 } from "antd";
+import { useMemo } from "react";
 import CommentList from "../components/commentsData";
 import { motion } from "framer-motion";
 import { useEffect, useState, useRef } from "react";
@@ -15,6 +16,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
 import CartDrawer from "../components/CartDrawer";
 import ProductCard from "../components/ProductCard";
+import default_image from "../assets/default_image.png";
 // import { addManyToCart } from "../redux/slices/cartSlice";
 import useSessionStorage from "../custom hooks/useSessionStorage";
 // import {
@@ -117,10 +119,20 @@ const ProductDetailPage = () => {
   //   const isAuthenticated = useSelector((state) => state.auth?.isAuthenticated);
   //   const loading = useSelector((state) => state.products?.loading);
   const loading = null;
-  const product = null;
+  const product = useMemo(
+    () => ({
+      id: 4,
+      name: "Nâng cấp Zoom Pro 100 người 3 tháng - Chính chủ",
+      price: "597.000",
+      image: default_image,
+      description:
+        "Gói nâng cấp Zoom Pro 100 người sử dụng trong 3 tháng, chính chủ.",
+    }),
+    []
+  );
   const sizeByProduct = null;
   const saleProducts = null;
-  const isAuthenticated = null;
+  const isAuthenticated = true;
   const dataSource = null;
   // const dataSource = sizeByProduct?.map((item, index) => ({
   //   ...item,
@@ -135,7 +147,7 @@ const ProductDetailPage = () => {
   const [cart, setCart] = useState([]);
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [selectedImage, setSelectedImage] = useState(
-    product?.images[0]?.url ?? "/src/assets/default_image.png"
+    product?.image ?? "src/assets/default_image.png"
   );
 
   const handleImageClick = (url) => {
@@ -163,26 +175,26 @@ const ProductDetailPage = () => {
 
   useEffect(() => {
     if (product) {
-      setSelectedImage(product.images[0]?.url);
+      setSelectedImage(product?.image?.url);
       // console.log("Updated selectedImage:", product.images[0]?.url);
     }
   }, [product]);
 
   //check viewed product
-  useEffect(() => {
-    if (product) {
-      setViewedProducts((prevViewedProducts) => {
-        const isProductViewed = prevViewedProducts.some(
-          (p) => p?.id === product?.id
-        );
-        if (!isProductViewed) {
-          return [...prevViewedProducts, product];
-        }
+  // useEffect(() => {
+  //   if (product) {
+  //     setViewedProducts((prevViewedProducts) => {
+  //       const isProductViewed = prevViewedProducts.some(
+  //         (p) => p?.id === product?.id
+  //       );
+  //       if (!isProductViewed) {
+  //         return [...prevViewedProducts, product];
+  //       }
 
-        return prevViewedProducts;
-      });
-    }
-  }, [product]);
+  //       return prevViewedProducts;
+  //     });
+  //   }
+  // }, [product]);
 
   const handleQuantityChange = (RowItem, newCount) => {
     const key = RowItem.key;
@@ -218,7 +230,7 @@ const ProductDetailPage = () => {
   const addToCart = () => {
     if (cart && cart?.length > 0) {
       // console.log("cart   ", cart);
-      dispatch(addManyToCart({ products: cart }));
+      // dispatch(addManyToCart({ products: cart }));
       // dispatch(fetchCartData());
       showDrawer();
       // dispatch(fetchCartData());
@@ -262,12 +274,12 @@ const ProductDetailPage = () => {
   ];
 
   const getProductListSale = (page) => {
-    dispatch(
-      fetchSaleProductList({
-        currentPage: page,
-        pageSize: 5,
-      })
-    );
+    // dispatch(
+    //   fetchSaleProductList({
+    //     currentPage: page,
+    //     pageSize: 5,
+    //   })
+    // );
   };
 
   useEffect(() => {
@@ -306,7 +318,7 @@ const ProductDetailPage = () => {
               </div>
 
               {/* Thumbnail hình ảnh nhỏ */}
-              {product?.images?.length > 1 && (
+              {/* {product?.images?.length > 1 && (
                 <div className="absolute bottom-2 left-0 right-0 flex sm:flex-col sm:flex-wrap gap-2 sm:w-auto sm:justify-center">
                   {product?.images?.map((image, index) => (
                     <div
@@ -322,7 +334,7 @@ const ProductDetailPage = () => {
                     </div>
                   ))}
                 </div>
-              )}
+              )} */}
             </motion.div>
 
             <motion.div
