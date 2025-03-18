@@ -16,6 +16,7 @@ const ProductCard = React.memo(function ProductCard({
     "viewedProducts",
     []
   );
+
   const addViewedProduct = () => {
     setViewedProduct(product);
     // console.log(viewedProduct);
@@ -24,8 +25,9 @@ const ProductCard = React.memo(function ProductCard({
 
   const navigate = useNavigate();
   let isSale = product?.is_sale;
-  let islogIN = useSelector((state) => state.auth.isAuthenticated);
-  const imageUrl = product?.images[0] ? product?.images[0] : placeholder;
+  // let islogIN = useSelector((state) => state.auth.isAuthenticated);
+  let islogIN = true;
+  // const imageUrl = product?.images[0] ? product?.images[0] : placeholder;
 
   return (
     <motion.div

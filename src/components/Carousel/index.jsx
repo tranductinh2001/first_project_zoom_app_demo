@@ -37,16 +37,17 @@ export default function _Carousel() {
       <Carousel
         className="w-full h-full"
         arrows
-        autoplay
+        autoplay={{ dotDuration: true }}
+        autoplaySpeed={2000}
         pauseOnHover
         // nextArrow={<CustomArrow direction="right" />}
         // prevArrow={<CustomArrow direction="left" />}
         fade
         customPaging={(i) => {
           return (
-            <div className="flex items-center justify-center w-12 h-12">
+            <div className="flex items-center justify-center w-full h-20">
               <img
-                className="object-cover w-10 h-10 border border-gray-200 rounded-md"
+                className="object-cover w-20 h-10 border border-gray-200 rounded-md"
                 src={`/src/assets/carousel${i + 1}.jpg`}
                 alt={`Slide ${i + 1}`}
               />
@@ -58,21 +59,21 @@ export default function _Carousel() {
           <img
             src={carousel1}
             alt=""
-            className="object-cover w-full rounded-lg h-[500px]"
+            className="object-cover w-full rounded-lg h-[300px]"
           />
         </div>
         <div key="2" className="flex items-center justify-center bg-red-100">
           <img
             src={carousel2}
             alt=""
-            className="object-cover w-full rounded-lg h-[500px]"
+            className="object-cover w-full rounded-lg h-[300px]"
           />
         </div>
         <div key="3" className="flex items-center justify-center bg-red-100">
           <img
             src={carousel3}
             alt=""
-            className="object-cover w-full rounded-lg h-[500px]"
+            className="object-cover w-full rounded-lg h-[300px]"
           />
         </div>
       </Carousel>

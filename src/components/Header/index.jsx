@@ -8,10 +8,11 @@ import { FaHeadphones, FaHome, FaShoppingCart, FaUser } from "react-icons/fa";
 import {
     IoAppsSharp,
   IoLogOut,
-  IoPersonAddSharp,
+  IoGift ,
   IoPersonCircle,
-  IoShirtSharp,
+  IoShirtSharp,IoPricetagOutline 
 } from "react-icons/io5";
+import { FaNewspaper } from "react-icons/fa6";
 
 import logo from "../../assets/logo.jpg";
 // import useRedirectToLogin from "../../custom hooks/useRedirectToLogin";
@@ -147,7 +148,10 @@ export default function Header() {
   // );
   const currentUser = null;
   const isAuthenticated = null;
-  const number_of_product = null;
+  // const number_of_product = useSelector(
+  //   (state) => state.cart?.number_of_product
+  // );
+  const number_of_product = 1;
   const menuItems = [
     {
       Icon: FaHome,
@@ -189,21 +193,34 @@ export default function Header() {
             src={logo}
             alt=""
           />
-        </Link>
+        </Link>        
+        {/* <div className="items-center justify-end hidden w-full h-full gap-4 pt-1 lg:flex">
+
+        <NavigationLink 
+            title="Bảng giá Zoom"
+            Icon={IoPricetagOutline}
+            to="/profile/orders" 
+          /> 
+          </div> */}
         <SearchBar />
         <div className="items-center justify-end hidden w-full h-full gap-4 pt-1 lg:flex">
-          <NavigationLink
+          {/* <NavigationLink
             title="Kiểm tra đơn hàng"
             Icon={PiNotepadFill}
             to="/profile/orders"
+          /> */}
+          <a Icon={IoGift}></a>
+          <NavigationLink
+            title="Bảng giá Zoom"
+            Icon={IoPricetagOutline}
+            to="/profile/orders"
           />
           <NavigationLink
-            count={isAuthenticated ? number_of_product || 0 : 0}
-            title="Giỏ hàng"
-            Icon={FaShoppingCart}
-            to="/cart"
+            title="Tin tức"
+            Icon={FaNewspaper}
+            to="/profile/orders"
           />
-          {isAuthenticated && currentUser ? (
+          {/* {isAuthenticated && currentUser ? (
             <NavigationLink
               title={`Xin chào, ${currentUser?.username}`}
               Icon={FaUser}
@@ -215,7 +232,7 @@ export default function Header() {
               Icon={IoPersonAddSharp}
               to="/register"
             />
-          )}
+          )} */}
           {isAuthenticated && currentUser ? (
             <Link
               className="flex flex-row items-center gap-2 text-sm"
@@ -227,6 +244,12 @@ export default function Header() {
           ) : (
             <NavigationLink title="Đăng nhập" Icon={IoPersonCircle} />
           )}
+          <NavigationLink
+            count={isAuthenticated ? number_of_product || 0 : 0}
+            title="Giỏ hàng"
+            Icon={FaShoppingCart}
+            to="/cart"
+          />
         </div>
       </div>
 

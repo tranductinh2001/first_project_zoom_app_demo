@@ -1,5 +1,5 @@
-import { useState } from 'react'
-import './App.css'
+import { useState } from "react";
+import "./App.css";
 import LayoutClient from "./layout/LayoutClient";
 import { useEffect, lazy, Suspense } from "react";
 import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
@@ -9,13 +9,12 @@ import { CSpinner, useColorModes } from "@coreui/react";
 
 const ScrollToTop = lazy(() => import("./components/ScrollToTop"));
 const HomePage = lazy(() => import("./pages/HomePage"));
+const ProductDetailPage = lazy(() => import("./pages/ProductDetailPage"));
 
 function App() {
-
   return (
     <BrowserRouter>
-    <Suspense fallback={<Loading />}>
-
+      <Suspense fallback={<Loading />}>
         <Routes>
           {/* Client Routes */}
           <Route path="/" element={<LayoutClient />}>
@@ -29,29 +28,17 @@ function App() {
             />
             <Route
               path="products"
-              element={
-                <ScrollToTop>
-                  {/* <ProductListPage /> */}
-                </ScrollToTop>
-              }
+              element={<ScrollToTop>{/* <ProductListPage /> */}</ScrollToTop>}
             />
             <Route
               path="product/:productId"
-              element={
-                <ScrollToTop>
-                  {/* <ProductDetailPage /> */}
-                </ScrollToTop>
-              }
+              element={<ScrollToTop>{<ProductDetailPage />}</ScrollToTop>}
             />
             {/* <Route path="categories" element={<CategoryPage />} />
             <Route path="search" element={<SearchPage />} /> */}
             <Route
               path="contact"
-              element={
-                <ScrollToTop>
-                  {/* <ContactPage /> */}
-                </ScrollToTop>
-              }
+              element={<ScrollToTop>{/* <ContactPage /> */}</ScrollToTop>}
             />
             {/* <Route element={<RequireAuth />}>
               <Route path="profile" element={<UserProfilePage />}>
@@ -89,12 +76,10 @@ function App() {
             <Route index element={<CartPage />} />
           </Route>
           <Route path="*" element={<NotFoundPage />} /> */}
-
-
         </Routes>
-    </Suspense>
-  </BrowserRouter>
-  )
+      </Suspense>
+    </BrowserRouter>
+  );
 }
 
-export default App
+export default App;
