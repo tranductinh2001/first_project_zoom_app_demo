@@ -22,6 +22,8 @@ const PersonalInformationForm = lazy(() =>
 );
 const ContactPage = lazy(() => import("./pages/ContactPage"));
 const UserProfilePage = lazy(() => import("./pages/UserProfilePage"));
+const RegisterPage = lazy(() => import("./Pages/RegisterPage"));
+
 function App() {
   return (
     <BrowserRouter>
@@ -76,7 +78,7 @@ function App() {
 
           {/* <Route index element={<CartPage />} /> */}
 
-          {/* <Route path="register" element={<RegisterPage />} /> */}
+          <Route path="register" element={<RegisterPage />} />
           {/* <Route path="cart" element={<CartLayout />}>
             <Route index element={<CartPage />} />
           </Route>

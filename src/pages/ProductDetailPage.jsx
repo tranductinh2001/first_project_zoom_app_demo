@@ -15,7 +15,7 @@ import { FaQrcode } from "react-icons/fa6";
 
 import { useMemo } from "react";
 import CommentList from "../components/commentsData";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { useEffect, useState, useRef } from "react";
 import { FaMinus, FaPlus } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
@@ -49,32 +49,23 @@ const QuantityEditor = ({ max, min, onChange }) => {
   const [value, setValue] = useState(0);
 
   const handleIncrease = () => {
-    if (value < max) {
-      setValue(value + 1);
-      onChange(value + 1);
-    }
+    // if (value < max) {
+    //   setValue(value + 1);
+    //   onChange(value + 1);
+    // }
+    if (value < 100) setValue(value + 1);
   };
 
   const handleDecrease = () => {
-    if (value > min) {
-      setValue(value - 1);
-      onChange(value - 1);
-    }
+    // if (value > min) {
+    //   setValue(value - 1);
+    //   onChange(value - 1);
+    // }
+    if (value > 0) setValue(value - 1);
   };
 
   return (
     <div className="flex flex-row items-center justify-center gap-1">
-      <InputNumber
-        readOnly
-        className="text-center w-28"
-        min={min}
-        max={max}
-        value={value}
-        onChange={(val) => {
-          setValue(val);
-          onChange(val);
-        }}
-      />
       <Button
         type="primary"
         shape="circle"
@@ -82,6 +73,17 @@ const QuantityEditor = ({ max, min, onChange }) => {
         onClick={handleIncrease}
         disabled={value >= max}
       />
+
+      <motion.span
+        className="text-center w-28"
+        key={value} // Khi value thay đổi, motion sẽ chạy lại
+        initial={{ opacity: 20, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+      >
+        {value}
+      </motion.span>
+
       <Button
         type="primary"
         shape="circle"
@@ -112,6 +114,7 @@ function CustomArrow(props) {
 const ProductDetailPage = () => {
   const { productId } = useParams();
   const [selected, setSelected] = useState("6 tháng");
+  const [value, setValue] = useState(0);
 
   const [viewedProducts, setViewedProducts] = useSessionStorage(
     "viewedProducts",
@@ -250,37 +253,6 @@ const ProductDetailPage = () => {
     }
   };
 
-  const columns = [
-    {
-      title: "Sản phẩm",
-      width: 120,
-      dataIndex: "sizeName",
-      align: "center",
-      key: "size",
-    },
-    {
-      title: "Tồn kho",
-      dataIndex: "quantity",
-      width: 150,
-      align: "center",
-      key: "quantity",
-    },
-    {
-      title: "Số lượng",
-      dataIndex: "count",
-      width: 150,
-      align: "center",
-      key: "count",
-      render: (text, record) => (
-        <QuantityEditor
-          min={0}
-          max={record.quantity}
-          value={record.count}
-          onChange={(newCount) => handleQuantityChange(record, newCount)}
-        />
-      ),
-    },
-  ];
   const options = ["1 tháng", "3 tháng", "6 tháng", "9 tháng", "12 tháng"];
 
   const getProductListSale = (page) => {
@@ -378,35 +350,39 @@ const ProductDetailPage = () => {
               transition={{ duration: 0.5 }}
               className="flex flex-col flex-1 w-full sm:ml-9 gap-4 sm:mt-24 justify-center items-center md:mt-0"
             >
-              <div className="flex items-center justify-start gap-4">
-                <span className="text-2xl font-semibold">{product?.name}</span>
+              <div className="flex flex-row items-start justify-start text-start gap-0 w-full">
+                <span className="inline-block text-2xl font-semibold text-start">
+                  {product?.name}
+                </span>
                 {/* <ClothingRoom
                   imageList={product?.images || []}
                   productId={product?.id || 0}
                 /> */}
               </div>
               {/* <RatingModal productId={productId} /> */}
-              <span className="text-green-500 text-lg font-quicksand">
-                {isAuthenticated ? (
-                  product?.sale ? (
-                    <div>
-                      <span className="line-through">
-                        {`Giá: ${product?.price?.toLocaleString() || "N/A"}đ`}
-                      </span>
-                      <br />
-                      <span className="text-green-500">
-                        {`Giá khuyến mãi: ${
-                          product?.salePrice?.toLocaleString() || "N/A"
-                        }đ`}
-                      </span>
-                    </div>
+              <div className="w-full">
+                <span className="text-green-500 text-lg font-quicksand text-start">
+                  {isAuthenticated ? (
+                    product?.sale ? (
+                      <div>
+                        <span className="line-through">
+                          {`Giá: ${product?.price?.toLocaleString() || "N/A"}đ`}
+                        </span>
+                        <br />
+                        <span className="text-green-500">
+                          {`Giá khuyến mãi: ${
+                            product?.salePrice?.toLocaleString() || "N/A"
+                          }đ`}
+                        </span>
+                      </div>
+                    ) : (
+                      `Giá: ${product?.price?.toLocaleString() || "N/A"}đ`
+                    )
                   ) : (
-                    `Giá: ${product?.price?.toLocaleString() || "N/A"}đ`
-                  )
-                ) : (
-                  "Đăng nhập để xem giá"
-                )}
-              </span>
+                    "Đăng nhập để xem giá"
+                  )}
+                </span>
+              </div>
               <ConfigProvider
                 theme={{
                   components: {
@@ -424,11 +400,13 @@ const ProductDetailPage = () => {
                   },
                 }}
               >
-                <Segmented
-                  options={options}
-                  value={selected}
-                  onChange={setSelected}
-                />
+                <div className=" overflow-x-auto whitespace-nowrap px-2 py-1 scrollbar-hide">
+                  <Segmented
+                    options={options}
+                    value={selected}
+                    onChange={setSelected}
+                  />
+                </div>
               </ConfigProvider>
               <span>
                 <span className="text-green-500 text-lg font-quicksand">
@@ -440,32 +418,7 @@ const ProductDetailPage = () => {
 
               <div className="flex flex-row items-center gap-1">
                 <div className="flex flex-row items-center justify-center gap-1">
-                  <Button
-                    type="primary"
-                    shape="circle"
-                    icon={<FaPlus />}
-                    // onClick={handleIncrease}
-                    // disabled={value >= max}
-                  />
-                  <InputNumber
-                    readOnly
-                    className="text-center w-28"
-                    min={1}
-                    max={99999}
-                    value={1}
-                    onChange={(val) => {
-                      // setValue(val);
-                      // onChange(val);
-                    }}
-                  />
-
-                  <Button
-                    type="primary"
-                    shape="circle"
-                    icon={<FaMinus />}
-                    // onClick={handleDecrease}
-                    // disabled={value <= min}
-                  />
+                  <QuantityEditor />
                 </div>
               </div>
               {isAuthenticated && (

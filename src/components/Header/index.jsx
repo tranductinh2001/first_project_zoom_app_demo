@@ -5,6 +5,7 @@ import { Link, NavLink } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { PiNotepadFill } from "react-icons/pi";
 import { FaHeadphones, FaHome, FaShoppingCart, FaUser } from "react-icons/fa";
+import LoginPage from "./../../pages/LoginPage";
 import {
   IoAppsSharp,
   IoLogOut,
@@ -15,11 +16,12 @@ import {
   IoPersonAddSharp,
 } from "react-icons/io5";
 import { FaNewspaper } from "react-icons/fa6";
-
+import { useState, useRef, useEffect } from "react";
 import logo from "../../assets/logo1.svg";
 // import useRedirectToLogin from "../../custom hooks/useRedirectToLogin";
 import CategoryDropdown from "../CategoryDropdown";
 import SearchBar from "../SearchBar";
+import RegisterPage from "../../Pages/RegisterPage";
 
 // import { logout } from "../../redux/slices/authSlice";
 const { SubMenu } = Menu;
@@ -149,11 +151,34 @@ export default function Header() {
   //   (state) => state.cart?.number_of_product
   // );
   const currentUser = null;
-  const isAuthenticated = null;
+  const isAuthenticated = true;
   // const number_of_product = useSelector(
   //   (state) => state.cart?.number_of_product
   // );
   const number_of_product = 1;
+  const [isLoginFormVisible, setIsLoginFormVisible] = useState(false);
+  const [isResgisterFormVisible, setisResgisterFormVisible] = useState(false);
+  const [loginKey, setLoginKey] = useState(0); // Giá trị tăng dần
+  const [registerKey, setRegisterKey] = useState(0); // Giá trị tăng dần
+
+  const toggleRegisterForm = () => {
+    setisResgisterFormVisible(true);
+    setRegisterKey(registerKey + 1);
+    if (loginKey == 2) {
+      setLoginKey(1);
+    }
+    console.log(isResgisterFormVisible + loginKey);
+  };
+
+  const toggleLoginForm = () => {
+    setIsLoginFormVisible(true);
+    setLoginKey(loginKey + 1);
+    if (loginKey == 2) {
+      setLoginKey(1);
+    }
+    console.log(isLoginFormVisible + loginKey);
+  };
+
   const menuItems = [
     {
       Icon: FaHome,
@@ -222,6 +247,11 @@ export default function Header() {
             Icon={FaNewspaper}
             to="/profile/orders"
           />
+          <NavigationLink
+            title={`Xin chào, ${currentUser?.username}`}
+            Icon={FaUser}
+            to="/profile"
+          />
           {isAuthenticated && currentUser ? (
             <NavigationLink
               title={`Xin chào, ${currentUser?.username}`}
@@ -229,11 +259,13 @@ export default function Header() {
               to="/profile"
             />
           ) : (
-            <NavigationLink
-              title="Đăng ký"
-              Icon={IoPersonAddSharp}
-              to="/profile"
-            />
+            <button
+              className="flex flex-row items-center gap-2 text-sm"
+              onClick={toggleRegisterForm}
+            >
+              <IoPersonAddSharp size={26} />
+              Đăng ký
+            </button>
           )}
           {isAuthenticated && currentUser ? (
             <Link
@@ -244,13 +276,14 @@ export default function Header() {
               Đăng xuất
             </Link>
           ) : (
-            <Link
-              to="/login"
+            <button
+              // to="/login"
               className="flex flex-row items-center gap-2 text-sm"
+              onClick={toggleLoginForm}
             >
               <IoPersonCircle size={26} />
               Đăng nhập
-            </Link>
+            </button>
           )}
           <NavigationLink
             count={isAuthenticated ? number_of_product || 0 : 0}
@@ -260,7 +293,6 @@ export default function Header() {
           />
         </div>
       </div>
-
       {/* Navigation Menu */}
       <div className="flex items-center justify-center w-full px-2 py-2 bg-white">
         <div className="flex flex-row items-center justify-end">
@@ -275,6 +307,18 @@ export default function Header() {
           ))}
         </div>
       </div>
+      {isResgisterFormVisible && (
+        <RegisterPage
+          isFormRegisterVisibleParam={isResgisterFormVisible}
+          key={registerKey}
+        />
+      )}
+      {isLoginFormVisible && (
+        <LoginPage
+          isFormLoginVisibleParam={isLoginFormVisible}
+          key={loginKey}
+        />
+      )}
     </div>
   );
 }

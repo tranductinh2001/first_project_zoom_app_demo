@@ -5,9 +5,11 @@ import {
   faNewspaper,
   faUser,
   faUserShield,
+  faBook,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Divider } from "antd";
+import { div } from "framer-motion/client";
 import React, { useEffect, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, Outlet, NavLink } from "react-router-dom";
@@ -19,6 +21,7 @@ const iconMap = {
   "lock-open": faLockOpen,
   "cart-shopping": faCartShopping,
   "arrow-right-from-bracket": faArrowRightFromBracket,
+  book: faBook,
   admin: faUserShield,
 };
 const baseOptionProfile = [
@@ -43,14 +46,14 @@ const baseOptionProfile = [
     path: "orders",
   },
   {
-    icon: "arrow-right-from-bracket",
-    title: "Đăng xuất",
-    path: "logout",
+    icon: "book",
+    title: "Hướng dẫn",
+    path: "help",
   },
   {
     icon: "arrow-right-from-bracket",
-    title: "Hướng dẫn",
-    path: "help",
+    title: "Đăng xuất",
+    path: "logout",
   },
 ];
 
@@ -64,17 +67,6 @@ export default function UserProfilePage() {
   const currentUser = null;
   const currentUsers = null;
   const isAdmin = true;
-  const optionProfile = useMemo(() => {
-    const options = [...baseOptionProfile];
-    if (isAdmin) {
-      options.push({
-        icon: "admin",
-        title: "Admin",
-        path: "/admin/dashboard",
-      });
-    }
-    return options;
-  }, [isAdmin]);
 
   const handleLogout = () => {
     // dispatch(logout());
@@ -83,61 +75,63 @@ export default function UserProfilePage() {
   // dispatch(fetchUserDetail());
   // }, []);
   return (
-    <div className="grid justify-center w-full grid-cols-1 gap-2 p-2 md:grid-cols-4">
-      {/* left side */}
-      <div className="flex flex-col w-full h-full col-span-1 p-4 bg-white">
-        <div className="flex flex-col w-full text-center text-neutral-500">
-          {/* <span className="font-semibold uppercase">
+    <div className="flex flex-row justify-center w-full px-6">
+      <div className="grid justify-center items-center w-4/5 grid-cols-1 gap-2 p-2 md:grid-cols-4">
+        {/* left side */}
+        <div className="flex flex-col w-full h-full col-span-1 p-4 bg-white">
+          <div className="flex flex-col w-full text-center text-neutral-500">
+            {/* <span className="font-semibold uppercase">
             {currentUsers?.username}
           </span> */}
-          <span className="font-semibold uppercase">{`${
-            currentUsers?.firstName || ""
-          } ${currentUsers?.lastName || ""}`}</span>
-          <span className="text-base">Email: {currentUsers?.email}</span>
-        </div>
-        <Divider />
+            <span className="font-semibold uppercase">{`${
+              currentUsers?.firstName || ""
+            } ${currentUsers?.lastName || ""}`}</span>
+            <span className="text-base">Email: {currentUsers?.email}</span>
+          </div>
+          <Divider />
 
-        <div className="flex flex-col space-y-2">
-          {baseOptionProfile.map((item, index) => {
-            if (item.path === "logout") {
+          <div className="flex flex-col space-y-2">
+            {baseOptionProfile.map((item, index) => {
+              if (item.path === "logout") {
+                return (
+                  <div
+                    key={index}
+                    onClick={handleLogout}
+                    className="p-2 text-black rounded-lg cursor-pointer hover:text-white hover:bg-blue-400 hover:font-semibold"
+                  >
+                    <div className="flex flex-row items-center gap-4">
+                      <FontAwesomeIcon icon={iconMap[item.icon]} />
+                      <span>{item.title}</span>
+                      <Link to={`/`}></Link>
+                    </div>
+                  </div>
+                );
+              }
               return (
-                <div
+                <NavLink
                   key={index}
-                  onClick={handleLogout}
-                  className="p-2 text-black rounded-lg cursor-pointer hover:text-white hover:bg-blue-400 hover:font-semibold"
+                  to={item.path}
+                  className={({ isActive, isPending }) =>
+                    isPending
+                      ? "text-black hover:text-white hover:bg-blue-400 hover:font-semibold p-2 rounded-lg duration-300"
+                      : isActive
+                      ? " text-white bg-blue-400 font-semibold p-2 rounded-lg"
+                      : "text-black hover:text-white hover:bg-blue-400 hover:font-semibold p-2 rounded-lg duration-300"
+                  }
                 >
                   <div className="flex flex-row items-center gap-4">
                     <FontAwesomeIcon icon={iconMap[item.icon]} />
                     <span>{item.title}</span>
-                    <Link to={`/`}></Link>
                   </div>
-                </div>
+                </NavLink>
               );
-            }
-            return (
-              <NavLink
-                key={index}
-                to={item.path}
-                className={({ isActive, isPending }) =>
-                  isPending
-                    ? "text-black hover:text-white hover:bg-blue-400 hover:font-semibold p-2 rounded-lg duration-300"
-                    : isActive
-                    ? " text-white bg-blue-400 font-semibold p-2 rounded-lg"
-                    : "text-black hover:text-white hover:bg-blue-400 hover:font-semibold p-2 rounded-lg duration-300"
-                }
-              >
-                <div className="flex flex-row items-center gap-4">
-                  <FontAwesomeIcon icon={iconMap[item.icon]} />
-                  <span>{item.title}</span>
-                </div>
-              </NavLink>
-            );
-          })}
+            })}
+          </div>
         </div>
-      </div>
-      {/* right side */}
-      <div className="w-full col-span-1 bg-white border-l md:col-span-3">
-        <Outlet />
+        {/* right side */}
+        <div className="w-full col-span-1 bg-white border-l md:col-span-3">
+          <Outlet />
+        </div>
       </div>
     </div>
   );

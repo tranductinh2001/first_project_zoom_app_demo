@@ -12,9 +12,11 @@ import img_1 from "../assets/introl_image/img_1.png";
 import img_2 from "../assets/introl_image/img_2.png";
 import img_3 from "../assets/introl_image/img_3.png";
 import { CheckCircleOutlined, CloseCircleOutlined } from "@ant-design/icons";
+import LoginPage from "./LoginPage";
 
 // import { fetchProductListAll } from "../redux/slices/productSlice";
 import { useState } from "react";
+import { div } from "framer-motion/client";
 const columns = [
   {
     title: "DỊCH VỤ",
@@ -157,10 +159,14 @@ const products = [
 export default function HomePage() {
   // const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
   // const productListAll = useSelector((state) => state.products?.productListAll);
-
+  const [isLoginFormVisible, setIsLoginFormVisible] = useState(false);
   const isAuthenticated = null;
   const productListAll = products;
   const [latestProducts, setLatestProducts] = useState([]);
+
+  const toggleLoginForm = () => {
+    setIsLoginFormVisible(!isLoginFormVisible);
+  };
 
   // const dispatch = useDispatch();
   // useEffect(() => {
@@ -190,16 +196,13 @@ export default function HomePage() {
           <CategoryDropdown isbordered={true} className="hidden md:block" />
           <img src={homeImage1} alt="" className="h-full rounded-lg" />
         </div> */}
-
-      <div className="flex flex-col gap-6 items-center justify-around rounded-3xl w-full md:w-full h-4/5 md:h-full md:col-span-8">
+      <div className="flex flex-col gap-6 items-center justify-around rounded-3xl w-full md:w-full h-4/5 md:h-full md:col-span-8 mt-4">
         <_Carousel />
       </div>
-
       {/* <div className="order-3 w-full h-full col-span-1 md:col-span-2">
           <img src={homeImage2} alt="" className="w-full h-full rounded-lg" />
         </div> */}
       {/* </div> */}
-
       <div className="flex items-center w-full mt-7 mb-5">
         <div className="flex-1 border-t border-gray-300"></div>
         <span className="px-4 text-lg font-bold tracking-widest">
@@ -261,7 +264,6 @@ export default function HomePage() {
         </span>
         <div className="flex-1 border-t border-gray-300"></div>
       </div>
-
       <div className="flex flex-col items-center justify-center w-full gap-4 my-10">
         <div className="flex flex-col items-center justify-center w-full gap-3 sm:flex-row sm:items-stretch">
           {/* {zoomServices?.map((item, index) => (
@@ -281,7 +283,6 @@ export default function HomePage() {
           />
         </div>
       </div>
-
       {!isAuthenticated ? (
         <div className="my-2">
           <div className="flex flex-col items-center gap-5 p-10 bg-gradient-to-r from-red-500 to-slate-400">
