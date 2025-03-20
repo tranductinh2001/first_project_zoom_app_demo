@@ -33,7 +33,7 @@ function CustomArrow({ className, style, onClick, direction }) {
 
 export default function _Carousel() {
   return (
-    <div className="w-full h-full">
+    <div className="h-full w-full">
       <Carousel
         className="w-full h-full"
         arrows
@@ -45,9 +45,9 @@ export default function _Carousel() {
         fade
         customPaging={(i) => {
           return (
-            <div className="flex items-center justify-center w-full h-20">
+            <div className="flex items-center justify-center w-full h-full">
               <img
-                className="object-cover w-20 h-10 border border-gray-200 rounded-md"
+                className="object-cover w-20 h-10 border border-gray-200 rounded-xl"
                 src={`/src/assets/carousel${i + 1}.jpg`}
                 alt={`Slide ${i + 1}`}
               />
@@ -59,21 +59,21 @@ export default function _Carousel() {
           <img
             src={carousel1}
             alt=""
-            className="object-cover w-full rounded-lg h-[300px]"
+            className="object-cover w-full rounded-lg h-full"
           />
         </div>
         <div key="2" className="flex items-center justify-center bg-red-100">
           <img
             src={carousel2}
             alt=""
-            className="object-cover w-full rounded-lg h-[300px]"
+            className="object-cover w-full rounded-lg h-full"
           />
         </div>
         <div key="3" className="flex items-center justify-center bg-red-100">
           <img
             src={carousel3}
             alt=""
-            className="object-cover w-full rounded-lg h-[300px]"
+            className="object-cover w-full rounded-lg h-full"
           />
         </div>
       </Carousel>

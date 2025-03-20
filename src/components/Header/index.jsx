@@ -12,6 +12,7 @@ import {
   IoPersonCircle,
   IoShirtSharp,
   IoPricetagOutline,
+  IoPersonAddSharp,
 } from "react-icons/io5";
 import { FaNewspaper } from "react-icons/fa6";
 
@@ -178,7 +179,7 @@ export default function Header() {
   ];
 
   return (
-    <div className="sticky top-0 flex-col items-center justify-start hidden w-full h-auto border-b border-b-slate-300 sm:flex z-[100]">
+    <div className="sticky top-0 flex-col items-center justify-start w-full h-auto border-b border-b-slate-300 sm:flex z-[100]">
       {/* Top Bar */}
       <div className="flex gap-9 items-center justify-center w-full p-2 text-white bg-[#3FA2F6]">
         <Link to="/">
@@ -186,9 +187,9 @@ export default function Header() {
             initial={{ opacity: 0, scale: 0 }}
             animate={{
               opacity: [0.7, 0.8, 0.9, 1],
-              scale: [1.6, 1.5, 1.3, 1], // Tăng scale để ảnh lớn hơn
+              scale: [1, 1, 1, 1], // Tăng scale để ảnh lớn hơn
             }}
-            whileHover={{ scale: 1.4 }}
+            whileHover={{ scale: 1.2 }}
             transition={{ duration: 0.4 }}
             className="ml-2 object-cover w-full h-full grow"
             src={logo}
@@ -221,7 +222,7 @@ export default function Header() {
             Icon={FaNewspaper}
             to="/profile/orders"
           />
-          {/* {isAuthenticated && currentUser ? (
+          {isAuthenticated && currentUser ? (
             <NavigationLink
               title={`Xin chào, ${currentUser?.username}`}
               Icon={FaUser}
@@ -231,9 +232,9 @@ export default function Header() {
             <NavigationLink
               title="Đăng ký"
               Icon={IoPersonAddSharp}
-              to="/register"
+              to="/profile"
             />
-          )} */}
+          )}
           {isAuthenticated && currentUser ? (
             <Link
               className="flex flex-row items-center gap-2 text-sm"
@@ -243,7 +244,13 @@ export default function Header() {
               Đăng xuất
             </Link>
           ) : (
-            <NavigationLink title="Đăng nhập" Icon={IoPersonCircle} />
+            <Link
+              to="/login"
+              className="flex flex-row items-center gap-2 text-sm"
+            >
+              <IoPersonCircle size={26} />
+              Đăng nhập
+            </Link>
           )}
           <NavigationLink
             count={isAuthenticated ? number_of_product || 0 : 0}

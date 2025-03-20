@@ -13,7 +13,7 @@ import FloatMenuButton from "../components/FloatMenuButton";
 export default function LayoutClient() {
   return (
     <div className="flex flex-col w-full h-full scroll-smooth">
-      <Header />
+      <Header className="w-full" />
       <ResponsiveHeader />
       <div className="h-full px-8 py-2">
         <Suspense fallback={<Loading />}>

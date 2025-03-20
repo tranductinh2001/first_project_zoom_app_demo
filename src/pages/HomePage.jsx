@@ -185,22 +185,20 @@ export default function HomePage() {
       animate={{ opacity: 1, x: 0 }}
       transition={{ duration: 0.2 }}
     >
-      <div className="grid w-full justify-center  gap-2 md:grid-cols-8">
-        {/* <div className="flex flex-col order-1 w-full col-span-1 gap-2 md:col-span-2 md:order-2">
+      {/* <div className="grid w-full justify-center gap-4"> */}
+      {/* <div className="flex flex-col order-1 w-full col-span-1 gap-2 md:col-span-2 md:order-2">
           <CategoryDropdown isbordered={true} className="hidden md:block" />
           <img src={homeImage1} alt="" className="h-full rounded-lg" />
         </div> */}
 
-        <div className="flex flex-col items-center justify-around rounded-3xl w-full h-full col-span-8 md:col-span-8 md:order-1 ">
-          {/* <div className="flex flex-col items-center justify-around w-full h-full col-span-8 md:col-span-8"> */}
+      <div className="flex flex-col gap-6 items-center justify-around rounded-3xl w-full md:w-full h-4/5 md:h-full md:col-span-8">
+        <_Carousel />
+      </div>
 
-          <_Carousel />
-        </div>
-
-        {/* <div className="order-3 w-full h-full col-span-1 md:col-span-2">
+      {/* <div className="order-3 w-full h-full col-span-1 md:col-span-2">
           <img src={homeImage2} alt="" className="w-full h-full rounded-lg" />
         </div> */}
-      </div>
+      {/* </div> */}
 
       <div className="flex items-center w-full mt-7 mb-5">
         <div className="flex-1 border-t border-gray-300"></div>
@@ -237,7 +235,7 @@ export default function HomePage() {
       <div className="flex flex-col items-center justify-center w-full gap-6 my-1">
         <div className="flex items-center w-full mt-5">
           <div className="flex-1 border-t border-gray-300"></div>
-          <span className="px-2 text-lg font-bold tracking-widest">
+          <span className="px-2 text-lg font-bold tracking-widest py-6">
             SẢN PHẨM NỔI BẬT
           </span>
           <div className="flex-1 border-t border-gray-300"></div>
@@ -245,9 +243,10 @@ export default function HomePage() {
         <div className="flex flex-wrap items-center justify-center gap-4 w-full">
           {Array.isArray(latestProducts) &&
             latestProducts
-              .slice(0, 4)
+              .slice(0, 6)
               .map((product, index) => (
                 <ProductCard
+                  className="w-[120px] h-[180px]"
                   key={product.id || index}
                   product={product}
                   displayQuantity={true}
@@ -263,8 +262,8 @@ export default function HomePage() {
         <div className="flex-1 border-t border-gray-300"></div>
       </div>
 
-      <div className="flex flex-col items-start justify-center w-full gap-4 my-10">
-        <div className="flex flex-col items-center justify-between w-full gap-3 sm:flex-row sm:items-stretch">
+      <div className="flex flex-col items-center justify-center w-full gap-4 my-10">
+        <div className="flex flex-col items-center justify-center w-full gap-3 sm:flex-row sm:items-stretch">
           {/* {zoomServices?.map((item, index) => (
             <AdsCard
               key={index}
@@ -274,7 +273,7 @@ export default function HomePage() {
             />
           ))} */}
           <Table
-            className="w-full"
+            className="w-2/4 mx-7"
             columns={columns}
             dataSource={data}
             // pagination={false}
