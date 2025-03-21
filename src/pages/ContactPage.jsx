@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { message } from "antd";
 import { FaYoutube, FaFacebook } from "react-icons/fa";
-import _Breadcrumb from "../components/Breadcrumb";
+
+import BreadcrumbNav from "../components/BreadcrumbNav";
 
 // import contactRequests from "../redux/request/contactRequests";
 
@@ -40,7 +41,7 @@ export default function ContactPage() {
 
   return (
     <div>
-      <_Breadcrumb title={"Liên hệ"} />
+      <BreadcrumbNav />
       <div className="w-full h-full px-2 py-4">
         <div className="flex flex-col items-start justify-center gap-4 mx-4 bg-white md:flex-row rounded-xl">
           <div className="flex flex-col items-start justify-start h-full gap-2">
@@ -51,10 +52,9 @@ export default function ContactPage() {
               Địa chỉ: 79 biên cương, phường Ngô Mây, TP.Quy Nhơn, tỉnh Bình
               Định
             </p>
-            <p>Điện thoại: 0352911750</p>
+            <p>Điện thoại: 123456789</p>
             <p>
-              E-mail:{" "}
-              <a href="mailto:tinhkkhoat@gmail.com">tinhkkhoat@gmail.com</a>
+              E-mail: <a href="mailto:tinhkkhoat@gmail.com">12345@gmail.com</a>
             </p>
             <div className="flex items-center justify-start gap-2">
               <a

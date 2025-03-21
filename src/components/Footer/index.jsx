@@ -11,7 +11,7 @@ export default function Footer() {
             <ul className="space-y-2">
               <li>
                 <Link href="/about" className="hover:text-[#0F67B1]">
-                  Giới thiệu
+                  Giới thiệu Muazoon.com
                 </Link>
               </li>
               <li>
@@ -57,16 +57,16 @@ export default function Footer() {
             </ul>
           </div>
           <div>
-            <h3 className="mb-4 text-lg font-bold">Danh mục sản phẩm</h3>
+            <h3 className="mb-4 text-lg font-bold">Danh mục tài khoản</h3>
             <ul className="space-y-2">
               <li>
                 <Link href="/category/phones" className="hover:text-[#0F67B1]">
-                  Quần áo thương hiệu
+                  Giỏ hàng
                 </Link>
               </li>
               <li>
                 <Link href="/category/tablets" className="hover:text-[#0F67B1]">
-                  Cầu lông
+                  Sản phẩm đã mua
                 </Link>
               </li>
               <li>
@@ -76,29 +76,46 @@ export default function Footer() {
                 >
                   Khuyến mãi
                 </Link>
+              </li>{" "}
+              <li>
+                <Link
+                  href="/category/accessories"
+                  className="hover:text-[#0F67B1]"
+                >
+                  Tin tức
+                </Link>
               </li>
             </ul>
           </div>
           <div>
             <h3 className="mb-4 text-lg font-bold">Kết nối với chúng tôi</h3>
             <div className="flex mb-4 space-x-4">
-              <a href="#" className="text-gray-400 hover:text-[#0F67B1]">
+              <a
+                href="https://zalo.me/2378578783874331652"
+                className="text-gray-400 hover:text-[#0F67B1]"
+              >
                 <Facebook size={24} />
               </a>
-              <a href="#" className="text-gray-400 hover:text-[#0F67B1]">
+              <a
+                href="https://zalo.me/2378578783874331652"
+                className="text-gray-400 hover:text-[#0F67B1]"
+              >
                 <Instagram size={24} />
               </a>
-              <a href="#" className="text-gray-400 hover:text-[#0F67B1]">
+              <a
+                href="https://zalo.me/2378578783874331652"
+                className="text-gray-400 hover:text-[#0F67B1]"
+              >
                 <Twitter size={24} />
               </a>
             </div>
-            <p className="mb-2">Hotline: 0352911750</p>
-            <p>Email: tinhkikhoat@gmail.com</p>
+            <p className="mb-2">Hotline: 123456789</p>
+            <p>Email: 123456789@gmail.com</p>
           </div>
         </div>
       </div>
       <div className="bottom-0 flex items-center justify-center w-full p-2 py-4 border-t">
-        © {new Date().getFullYear()} SỈ ĐỒ TINGMOBILE.VN
+        © {new Date().getFullYear()} Muazoom.com
       </div>
     </footer>
   );

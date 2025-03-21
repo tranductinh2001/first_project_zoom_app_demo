@@ -22,8 +22,7 @@ const PersonalInformationForm = lazy(() =>
 );
 const ContactPage = lazy(() => import("./pages/ContactPage"));
 const UserProfilePage = lazy(() => import("./pages/UserProfilePage"));
-const RegisterPage = lazy(() => import("./Pages/RegisterPage"));
-
+const ProductListPage = lazy(() => import("./pages/ProductListPage"));
 function App() {
   return (
     <BrowserRouter>
@@ -41,7 +40,11 @@ function App() {
             />
             <Route
               path="products"
-              element={<ScrollToTop>{/* <ProductListPage /> */}</ScrollToTop>}
+              element={
+                <ScrollToTop>
+                  <ProductListPage />
+                </ScrollToTop>
+              }
             />
             <Route
               path="product/:productId"
@@ -78,7 +81,6 @@ function App() {
 
           {/* <Route index element={<CartPage />} /> */}
 
-          <Route path="register" element={<RegisterPage />} />
           {/* <Route path="cart" element={<CartLayout />}>
             <Route index element={<CartPage />} />
           </Route>

@@ -32,12 +32,12 @@ const ProductCard = React.memo(function ProductCard({
   return (
     <motion.div
       initial={{ opacity: 0, scale: 0 }}
-      // animate={{ opacity: 1, scale: 1, x: 1 }}
+      animate={{ opacity: 1, scale: 1, x: 1 }}
       whileInView={{ opacity: 1, scale: 1 }}
       transition={{ duration: 0.1 }}
-      whileHover={{ y: -10 }}
+      whileHover={{ y: -20 }}
       viewport={{ once: true }}
-      className="inline-flex flex-row max-w-56 scale-50 origin-top items-center h-96 gap-2 p-3 text-center duration-500 bg-white shadow-md hover:shadow-black rounded-xl ring-1 ring-gray-300 ring-opacity-50 overflow-hidden"
+      className="inline-flex flex-row max-w-56 items-center max-h-full gap-2 p-3 text-center duration-500 bg-white shadow-xl hover:shadow-slate-600 rounded-xl ring-1 ring-gray-300 ring-opacity-50 overflow-hidden border-x-blue-400"
     >
       <div className="flex flex-col w-full gap-2 grow-2 ">
         <div className="relative block w-full h-1/4 basis-2/4">
@@ -48,7 +48,7 @@ const ProductCard = React.memo(function ProductCard({
                 ? product?.images[0]?.url
                 : "/src/assets/default_image.png"
             }
-            className={`max-w-full h-52 duration-500 shadow-neutral-500 transition-transform rounded-md object-contain flex-shrink-0`}
+            className={`max-w-full h-40 duration-500 shadow-neutral-500 transition-transform rounded-md object-contain flex-shrink-0`}
             alt={product?.name}
           />
 
@@ -69,7 +69,7 @@ const ProductCard = React.memo(function ProductCard({
         {/* Divider */}
         <div className="border-b"></div>
         <div className="flex flex-col gap-1 basis-2/4">
-          <div className="flex flex-wrap items-center justify-start gap-2">
+          <div className="flex flex-wrap items-center justify-start gap-2 min-w-full h-[60px] overflow-hidden">
             {product?.sizeList?.map((item, index) => (
               <span
                 key={index}
@@ -80,8 +80,8 @@ const ProductCard = React.memo(function ProductCard({
             ))}
           </div>
 
-          <div className="text-base text-left truncate w-52">
-            {product?.name} - {product?.brand?.name.toUpperCase()}
+          <div className="text-base text-left truncate w-48">
+            {product?.name} - {product?.brand?.name?.toUpperCase()}
           </div>
 
           <div className="max-h-6">

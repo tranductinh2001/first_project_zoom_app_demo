@@ -22,7 +22,7 @@ import logo from "../../assets/logo1.svg";
 import CategoryDropdown from "../CategoryDropdown";
 import SearchBar from "../SearchBar";
 import RegisterPage from "../../Pages/RegisterPage";
-
+import Testa from "../../pages/Testa";
 // import { logout } from "../../redux/slices/authSlice";
 const { SubMenu } = Menu;
 

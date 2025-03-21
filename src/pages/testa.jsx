@@ -11,7 +11,7 @@ import { motion } from "framer-motion";
 import { useRef } from "react";
 // import { setCreatedAccount } from "../redux/slices/authSlice";
 
-export default function RegisterPage({ isFormRegisterVisibleParam }) {
+export default function Testa({ isFormRegisterVisibleParam }) {
   // const isLoading = useSelector((state) => state.auth.isLoading);
   const isLoading = false;
 
